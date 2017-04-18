@@ -132,6 +132,7 @@ CREATE TABLE `User` (
   `usernameHyves` varchar(255) DEFAULT NULL COMMENT 'Hyves username',
   `usernameTwitter` varchar(255) DEFAULT NULL COMMENT 'Twitter username',
   `gender` varchar(15) DEFAULT NULL COMMENT 'Either ''MALE'' or ''FEMALE''',
+  `isAdmin` tinyint(1) DEFAULT 0 COMMENT 'Is admin flag',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Users who participated in one or more games';
