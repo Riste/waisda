@@ -27,6 +27,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Formula;
 
@@ -45,6 +46,7 @@ public class Video {
 	private int duration;
 
 	@Basic
+	@Size(max = 1024)
 	@Column(length = 1024)
 	private String imageUrl;
 
@@ -67,6 +69,7 @@ public class Video {
 	/** Fragmentenrubriek zoals in MBH dump. */
 	private Integer sectionNid;
 
+	@Size(max = 1024)
 	@Column(length = 1024)
 	private String sourceUrl;
 

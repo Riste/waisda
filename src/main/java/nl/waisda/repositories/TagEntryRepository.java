@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import nl.waisda.domain.TagEntry;
 import nl.waisda.domain.User;
@@ -271,6 +272,19 @@ public class TagEntryRepository extends AbstractRepository<TagEntry> {
         query.setParameter("normalizedTag", normalizedTag);
 
         return query.getResultList();
+	}
+
+	public List<TagEntry> getTagsForVideoEnteredAfter(int videoId, Date timestamp){
+		StringBuilder q = new StringBuilder("SELECT t FROM TagEntry t "
+				+ "WHERE t.game.video.id = :videoId");
+		if(timestamp != null)
+			q.append(" AND t.creationDate >= :timestamp");
+		q.append(" ORDER BY (t.creationDate)");
+		TypedQuery<TagEntry> query = getEntityManager().createQuery(q.toString(), TagEntry.class)
+				.setParameter("videoId", videoId);
+		if(timestamp != null)
+			query = query.setParameter("timestamp", timestamp);
+		return query.getResultList();
 	}
 
 }

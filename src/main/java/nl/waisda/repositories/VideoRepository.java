@@ -92,4 +92,17 @@ public class VideoRepository extends AbstractRepository<Video> {
 		return query.getResultList();
 	}
 
+	public boolean existsWithFragmentID(String fragmentID){
+		String q = "SELECT v FROM Video v WHERE v.fragmentID = :fragmentID";
+		return getEntityManager().createQuery(q, Video.class)
+				.setParameter("fragmentID", fragmentID).getResultList().size() > 0;
+	}
+
+	public Video findByFragmentID(String fragmentID){
+		String q = "SELECT v FROM Video v WHERE v.fragmentID = :fragmentID";
+		List<Video> result = getEntityManager().createQuery(q, Video.class)
+				.setParameter("fragmentID", fragmentID).getResultList();
+		return result.size() == 0? null: result.get(0);
+	}
+
 }
